@@ -128,12 +128,14 @@ echo.
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
 echo.
 
-wmic cpu get name
+echo CPU:
+powershell -Command "Get-CimInstance Win32_Processor | Select-Object -ExpandProperty Name"
 echo.
 
-wmic memorychip get capacity
-
+echo Memoria RAM (bytes):
+powershell -Command "Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum | Select-Object -ExpandProperty Sum"
 echo.
+
 pause
 goto menu
 
